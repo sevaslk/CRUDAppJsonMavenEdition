@@ -1,5 +1,8 @@
 package com.sevaslk.crudappjsonmavenedition.model;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.util.Objects;
 
 public class Skill {
@@ -33,11 +36,11 @@ public class Skill {
         return Objects.hash(id, name);
     }
 
+
     @Override
     public String toString() {
-        return "Skill{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        return gson.toJson(this);
+//        return "id= " + id + ", name= " + name;
     }
 }

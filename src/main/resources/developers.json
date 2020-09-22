@@ -1,0 +1,1 @@
+[{"id":1,"name":"John","skills":[{"id":3,"name":"SQL"},{"id":1,"name":"Java"},{"id":5,"name":"JUnit"}],"account":{"id":123,"accountStatus":"ACTIVE"}},{"id":2,"name":"Pam"}]

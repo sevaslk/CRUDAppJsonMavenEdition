@@ -1,6 +1,7 @@
 package com.sevaslk.crudappjsonmavenedition.model;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Developer {
     private Long id;
@@ -13,5 +14,35 @@ public class Developer {
         this.name = name;
         this.skills = skills;
         this.account = account;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Developer developer = (Developer) o;
+        return Objects.equals(id, developer.id) &&
+                Objects.equals(name, developer.name) &&
+                Objects.equals(skills, developer.skills) &&
+                Objects.equals(account, developer.account);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, skills, account);
+    }
+
+    @Override
+    public String toString() {
+        return "Developer{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", skills=" + skills +
+                ", account=" + account +
+                '}';
     }
 }

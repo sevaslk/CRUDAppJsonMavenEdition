@@ -16,10 +16,9 @@ import java.util.stream.Collectors;
 
 public class GsonSkillRepositoryImpl implements SkillRepository {
 
-    String SKILLS_JSON = "src\\main\\resources\\skills.json";
+    private String SKILLS_JSON = "src\\main\\resources\\skills.json";
 
-    Gson gson = new Gson();
-    private Skill Skill;
+    private Gson gson = new Gson();
 
     @Override
     public List<Skill> getAll() throws IOException {
@@ -38,7 +37,7 @@ public class GsonSkillRepositoryImpl implements SkillRepository {
     public Skill save(Skill newSkill) throws IOException {
         if (Files.exists(Paths.get(SKILLS_JSON))) {
             List<Skill> skillList = getSkillsFromJson(SKILLS_JSON);
-            if (skillList.contains(newSkill)) {// TODO: 20.09.2020 validation doesnt work
+            if (skillList.contains(newSkill)) {
                 System.out.println("Skill already exist");
                 return newSkill;
             } else {
@@ -51,7 +50,6 @@ public class GsonSkillRepositoryImpl implements SkillRepository {
         }
         return newSkill;
     }
-
 
     @Override
     public Skill update(Skill newSkill) throws IOException {

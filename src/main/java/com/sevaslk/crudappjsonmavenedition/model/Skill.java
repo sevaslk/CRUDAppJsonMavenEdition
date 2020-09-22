@@ -36,7 +36,6 @@ public class Skill {
         return Objects.hash(id, name);
     }
 
-
     @Override
     public String toString() {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();

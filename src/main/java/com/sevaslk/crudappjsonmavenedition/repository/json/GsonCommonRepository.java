@@ -15,8 +15,8 @@ public abstract class GsonCommonRepository<T> {
     List<T> getListFromJson(String json) {
         List<T> list = new ArrayList<>();
         try (FileReader reader = new FileReader(json)) {
-            list = gson.fromJson(reader, new TypeToken<List<T>>() {
-            }.getType());
+            return gson.fromJson(reader, new TypeToken<List<T>>() {
+                }.getType());
         } catch (IOException e) {
             e.printStackTrace();
         }

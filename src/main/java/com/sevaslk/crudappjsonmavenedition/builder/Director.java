@@ -3,7 +3,7 @@ package com.sevaslk.crudappjsonmavenedition.builder;
 import com.sevaslk.crudappjsonmavenedition.model.Developer;
 
 public class Director {
-    DeveloperBuilder developerBuilder;
+    private DeveloperBuilder developerBuilder;
 
    public void setDeveloperBuilder(DeveloperBuilder developerBuilder) {
         this.developerBuilder = developerBuilder;

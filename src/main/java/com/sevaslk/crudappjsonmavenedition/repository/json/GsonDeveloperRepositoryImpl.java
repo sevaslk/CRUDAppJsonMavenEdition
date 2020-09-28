@@ -14,13 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GsonDeveloperRepositoryImpl implements DeveloperRepository {
+public class GsonDeveloperRepositoryImpl extends GsonCommonRepository implements DeveloperRepository {
     private String DEVELOPERS_JSON = "src\\main\\resources\\developers.json";
     private Gson gson = new Gson();
 
     @Override
     public List<Developer> getAll() throws IOException {
-        return getDevelopersFromJson(DEVELOPERS_JSON);
+        return getListFromJson(DEVELOPERS_JSON);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class GsonDeveloperRepositoryImpl implements DeveloperRepository {
                 return newDeveloper;
             } else {
                 developerList.add(newDeveloper);
-                writeDevelopersToJson(developerList);
+                writeListToJson(developerList, DEVELOPERS_JSON);
             }
         } else {
             Files.createFile(Paths.get(DEVELOPERS_JSON));
@@ -55,7 +55,7 @@ public class GsonDeveloperRepositoryImpl implements DeveloperRepository {
                 .stream()
                 .map(developer -> developer.getId().equals(newDeveloper.getId()) ? newDeveloper : developer)
                 .collect(Collectors.toList());
-        writeDevelopersToJson(developerList);
+        writeListToJson(developerList, DEVELOPERS_JSON);
         return newDeveloper;
     }
 
@@ -63,7 +63,7 @@ public class GsonDeveloperRepositoryImpl implements DeveloperRepository {
     public void deleteById(Long id) throws IOException {
         List<Developer> developerList = getDevelopersFromJson(DEVELOPERS_JSON);
         developerList.removeIf(item -> item.getId().equals(id));
-        writeDevelopersToJson(developerList);
+        writeListToJson(developerList, DEVELOPERS_JSON);
     }
 
     private List<Developer> getDevelopersFromJson(String json) {
@@ -75,14 +75,6 @@ public class GsonDeveloperRepositoryImpl implements DeveloperRepository {
             e.printStackTrace();
         }
         return developerList;
-    }
-
-    private void writeDevelopersToJson(List<Developer> developerList) throws IOException {
-        try (FileWriter writer = new FileWriter(DEVELOPERS_JSON)) {
-            gson.toJson(developerList, writer);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
 }

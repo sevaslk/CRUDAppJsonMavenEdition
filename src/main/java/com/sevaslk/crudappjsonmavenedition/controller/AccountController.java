@@ -2,11 +2,8 @@ package com.sevaslk.crudappjsonmavenedition.controller;
 
 import com.sevaslk.crudappjsonmavenedition.model.Account;
 import com.sevaslk.crudappjsonmavenedition.model.AccountStatus;
-import com.sevaslk.crudappjsonmavenedition.model.Skill;
 import com.sevaslk.crudappjsonmavenedition.repository.AccountRepository;
-import com.sevaslk.crudappjsonmavenedition.repository.SkillRepository;
 import com.sevaslk.crudappjsonmavenedition.repository.json.GsonAccountRepositoryImpl;
-import com.sevaslk.crudappjsonmavenedition.repository.json.GsonSkillRepositoryImpl;
 
 import java.io.IOException;
 import java.util.List;

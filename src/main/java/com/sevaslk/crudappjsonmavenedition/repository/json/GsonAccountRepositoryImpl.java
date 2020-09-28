@@ -3,7 +3,6 @@ package com.sevaslk.crudappjsonmavenedition.repository.json;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.sevaslk.crudappjsonmavenedition.model.Account;
-import com.sevaslk.crudappjsonmavenedition.model.Skill;
 import com.sevaslk.crudappjsonmavenedition.repository.AccountRepository;
 
 import java.io.FileReader;
@@ -15,13 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GsonAccountRepositoryImpl implements AccountRepository {
+public class GsonAccountRepositoryImpl extends GsonCommonRepository implements AccountRepository {
     private String ACCOUNTS_JSON = "src\\main\\resources\\accounts.json";
     private Gson gson = new Gson();
 
     @Override
     public List<Account> getAll() throws IOException {
-        return getAccountsFromJson(ACCOUNTS_JSON);
+        return getListFromJson(ACCOUNTS_JSON);
     }
 
     @Override
@@ -40,7 +39,7 @@ public class GsonAccountRepositoryImpl implements AccountRepository {
                 return newAccount;
             } else {
                 accountList.add(newAccount);
-                writeAccountsToJson(accountList);
+                writeListToJson(accountList, ACCOUNTS_JSON);
             }
         } else {
             Files.createFile(Paths.get(ACCOUNTS_JSON));
@@ -55,7 +54,7 @@ public class GsonAccountRepositoryImpl implements AccountRepository {
                 .stream()
                 .map(account -> account.getId().equals(newAccount.getId()) ? newAccount : account)
                 .collect(Collectors.toList());
-        writeAccountsToJson(accountList);
+        writeListToJson(accountList, ACCOUNTS_JSON);
         return newAccount;
     }
 
@@ -63,7 +62,7 @@ public class GsonAccountRepositoryImpl implements AccountRepository {
     public void deleteById(Long id) throws IOException {
         List<Account> accountList = getAccountsFromJson(ACCOUNTS_JSON);
         accountList.removeIf(item -> item.getId().equals(id));
-        writeAccountsToJson(accountList);
+        writeListToJson(accountList, ACCOUNTS_JSON);
     }
 
     private List<Account> getAccountsFromJson(String json) {
@@ -77,11 +76,4 @@ public class GsonAccountRepositoryImpl implements AccountRepository {
         return accountList;
     }
 
-    private void writeAccountsToJson(List<Account> accountList) throws IOException {
-        try (FileWriter writer = new FileWriter(ACCOUNTS_JSON)) {
-            gson.toJson(accountList, writer);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }

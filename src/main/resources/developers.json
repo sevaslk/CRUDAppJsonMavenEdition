@@ -1,1 +1,1 @@
-[{"id":1,"name":"John","skills":[{"id":3,"name":"SQL"},{"id":1,"name":"Java"},{"id":5,"name":"JUnit"}],"account":{"id":123,"accountStatus":"ACTIVE"}},{"id":2,"name":"Pam"}]
+[{"id":1,"name":"John","skills":[{"id":3,"name":"SQL"},{"id":1,"name":"Java"},{"id":5,"name":"JUnit"}],"account":{"id":123,"accountStatus":"ACTIVE"}},{"id":2,"name":"Pam"},{"id":2,"name":"Python Developer","skills":[{"id":2,"name":"Python"}],"account":{"id":456,"accountStatus":"ACTIVE"}}]

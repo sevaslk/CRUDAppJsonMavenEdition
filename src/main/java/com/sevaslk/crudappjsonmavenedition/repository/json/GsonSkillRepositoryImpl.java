@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GsonSkillRepositoryImpl implements SkillRepository {
+public class GsonSkillRepositoryImpl extends GsonCommonRepository implements SkillRepository {
 
     private String SKILLS_JSON = "src\\main\\resources\\skills.json";
 
@@ -22,12 +22,12 @@ public class GsonSkillRepositoryImpl implements SkillRepository {
 
     @Override
     public List<Skill> getAll() throws IOException {
-        return getSkillsFromJson(SKILLS_JSON);
+        return getListFromJson(SKILLS_JSON);
     }
 
     @Override
     public Skill getById(Long id) throws IOException {
-        return getSkillsFromJson(SKILLS_JSON)
+            return getSkillsFromJson(SKILLS_JSON)
                 .stream()
                 .filter(skill -> skill.getId().equals(id))
                 .findFirst().orElse(null);
@@ -36,13 +36,13 @@ public class GsonSkillRepositoryImpl implements SkillRepository {
     @Override
     public Skill save(Skill newSkill) throws IOException {
         if (Files.exists(Paths.get(SKILLS_JSON))) {
-            List<Skill> skillList = getSkillsFromJson(SKILLS_JSON);
+            List<Skill> skillList = getListFromJson(SKILLS_JSON);
             if (skillList.contains(newSkill)) {
                 System.out.println("Skill already exist");
                 return newSkill;
             } else {
                 skillList.add(newSkill);
-                writeSkillsToJson(skillList);
+                writeListToJson(skillList, SKILLS_JSON);
             }
         } else {
             Files.createFile(Paths.get(SKILLS_JSON));
@@ -57,7 +57,7 @@ public class GsonSkillRepositoryImpl implements SkillRepository {
                 .stream()
                 .map(skill -> skill.getId().equals(newSkill.getId()) ? newSkill : skill)
                 .collect(Collectors.toList());
-        writeSkillsToJson(skillList);
+        writeListToJson(skillList, SKILLS_JSON);
         return newSkill;
     }
 
@@ -65,10 +65,10 @@ public class GsonSkillRepositoryImpl implements SkillRepository {
     public void deleteById(Long id) throws IOException {
         List<Skill> skillList = getSkillsFromJson(SKILLS_JSON);
         skillList.removeIf(item -> item.getId().equals(id));
-        writeSkillsToJson(skillList);
+        writeListToJson(skillList, SKILLS_JSON);
     }
 
-    private List<Skill> getSkillsFromJson(String json) {
+    List<Skill> getSkillsFromJson(String json) {
         List<Skill> skillList = new ArrayList<>();
         try (FileReader reader = new FileReader(json)) {
             skillList = gson.fromJson(reader, new TypeToken<List<Skill>>() {
@@ -77,14 +77,6 @@ public class GsonSkillRepositoryImpl implements SkillRepository {
             e.printStackTrace();
         }
         return skillList;
-    }
-
-    private void writeSkillsToJson(List<Skill> skillList) throws IOException {
-        try (FileWriter writer = new FileWriter(SKILLS_JSON)) {
-            gson.toJson(skillList, writer);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
 }

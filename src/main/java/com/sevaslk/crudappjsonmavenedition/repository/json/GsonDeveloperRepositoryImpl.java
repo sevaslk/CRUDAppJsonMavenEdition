@@ -3,7 +3,6 @@ package com.sevaslk.crudappjsonmavenedition.repository.json;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.sevaslk.crudappjsonmavenedition.model.Developer;
-import com.sevaslk.crudappjsonmavenedition.model.Skill;
 import com.sevaslk.crudappjsonmavenedition.repository.DeveloperRepository;
 
 import java.io.FileReader;

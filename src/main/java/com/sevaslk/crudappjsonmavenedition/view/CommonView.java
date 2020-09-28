@@ -1,9 +1,12 @@
 package com.sevaslk.crudappjsonmavenedition.view;
 
+import com.sevaslk.crudappjsonmavenedition.builder.Director;
+
 import java.io.IOException;
 import java.util.Scanner;
 
 public class CommonView {
+    Director director = new Director();
 
     public void start() throws IOException {
         selectOperation(selectEntity());

@@ -1,0 +1,13 @@
+use test1;
+CREATE TABLE IF NOT EXISTS courses (student varchar(255), class varchar(255));
+TRUNCATE TABLE courses;
+INSERT INTO courses (student, class) values ('A', 'Math');
+INSERT INTO courses (student, class) values ('B', 'English');
+INSERT INTO courses (student, class) values ('C', 'Math');
+INSERT INTO courses (student, class) values ('D', 'Biology');
+INSERT INTO courses (student, class) values ('E', 'Math');
+INSERT INTO courses (student, class) values ('F', 'Computer');
+INSERT INTO courses (student, class) values ('G', 'Math');
+INSERT INTO courses (student, class) values ('H', 'Math');
+INSERT INTO courses (student, class) values ('I', 'Math');
+SELECT class FROM courses HAVING COUNT(class)>5;

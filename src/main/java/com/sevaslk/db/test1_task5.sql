@@ -1,0 +1,12 @@
+use test1;
+CREATE TABLE IF NOT EXISTS Customers (Id int, Name varchar(255));
+CREATE TABLE IF NOT EXISTS Orders (Id int, CustomerId int);
+TRUNCATE TABLE Customers;
+INSERT INTO Customers (Id, Name) values ('1', 'Joe');
+INSERT INTO Customers (Id, Name) values ('2', 'Henry');
+INSERT INTO Customers (Id, Name) values ('3', 'Sam');
+INSERT INTO Customers (Id, Name) values ('4', 'Max');
+TRUNCATE TABLE Orders;
+INSERT INTO Orders (Id, CustomerId) values ('1', '3');
+INSERT INTO Orders (Id, CustomerId) values ('2', '1');
+SELECT Name FROM Customers LEFT JOIN Orders ON (Customers.Id = Orders.CustomerId) WHERE Orders.Id IS NULL;
